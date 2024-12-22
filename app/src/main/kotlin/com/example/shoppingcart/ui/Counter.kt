@@ -47,7 +47,7 @@ fun Counter(
                 .fillMaxWidth()
                 .padding(horizontal = 4.dp)
         ) {
-            // Кнопка уменьшения количества
+            // Кнопка уменьшения количества, с отключением кнопки если значение минимально
             Text(
                 text = "-",
                 style = MaterialTheme.typography.bodyLarge.copy(
@@ -57,7 +57,8 @@ fun Counter(
                 modifier = Modifier
                     .clickable { if (count > 1) onCountChange(count - 1) }
                     .align(Alignment.CenterVertically)
-                    .padding(4.dp)
+                    .padding(4.dp),
+                color = if (count > 1) Color.Black else Color.Gray
             )
 
             // Текущее количество товара
@@ -72,7 +73,7 @@ fun Counter(
                     .padding(horizontal = 8.dp)
             )
 
-            // Кнопка увеличения количества
+            // Кнопка увеличения количества, отключение кнопки если значение максимально
             Text(
                 text = "+",
                 style = MaterialTheme.typography.bodyLarge.copy(
@@ -82,7 +83,8 @@ fun Counter(
                 modifier = Modifier
                     .clickable { if (count < 99) onCountChange(count + 1) }
                     .align(Alignment.CenterVertically)
-                    .padding(4.dp)
+                    .padding(4.dp),
+                color = if (count < 99) Color.Black else Color.Gray
             )
         }
     }
