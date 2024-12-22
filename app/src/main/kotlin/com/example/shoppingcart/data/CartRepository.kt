@@ -1,6 +1,5 @@
 package com.example.shoppingcart.data
 
-
 /**
  * Репозиторий корзины, реализующий интерфейс взаимодействия с элементами CartInteractor.
  */

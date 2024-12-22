@@ -14,8 +14,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.shoppingcart.R
-import coil.compose.AsyncImage
 import com.example.shoppingcart.data.CartItem
+import coil.compose.AsyncImage
 import coil.request.ErrorResult
 import coil.request.ImageRequest
 import coil.request.SuccessResult
