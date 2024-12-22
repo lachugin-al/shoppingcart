@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("dagger.hilt.android.plugin") // Hilt плагин
     kotlin("kapt")
+//    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 android {
@@ -32,7 +33,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -40,6 +41,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.7"
     }
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -62,11 +67,13 @@ dependencies {
     implementation(libs.androidx.ui.test.junit4.android)
 
     // Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     // Hilt for Compose
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation(libs.hilt.navigation.compose)
+
+//    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -76,3 +83,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+//tasks {
+//    withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+//        reports {
+//            html.required.set(true)
+//            xml.required.set(true)
+//            txt.required.set(false)
+//        }
+//    }
+//}
+//
+//tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+//    jvmTarget = "17"
+//}
