@@ -1,6 +1,5 @@
 package com.example.shoppingcart.data
 
-
 /**
  * Класс CartItem описавает объект товара в корзине.
  *

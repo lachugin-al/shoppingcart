@@ -1,6 +1,5 @@
 package com.example.shoppingcart.data
 
-
 /**
  * Интерфейс взаимодействия с элементами корзины
  */
