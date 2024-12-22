@@ -1,0 +1,71 @@
+# Системные файлы операционной системы
+.DS_Store
+Thumbs.db
+
+# Файлы IDE (IntelliJ IDEA/Android Studio)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Локальные настройки среды разработки
+.idea
+
+# Build папки
+/build/
+*/build/
+
+# Android Studio
+local.properties
+
+# Файлы Gradle
+.gradle/
+gradle-app.setting
+gradlew
+gradlew.bat
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Логи и временные файлы
+*.log
+
+# Каталог с автогенерируемыми ресурсами
+.cxx/
+gen/
+out/
+
+# Нативные файлы
+*.so
+*.dylib
+*.dll
+
+# Пользовательские настройки, например, keystore
+*.keystore
+*.jks
+
+# Резервные файлы системы и редакторов
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# Конфигурационные файлы CI/CD
+fastlane/report.xml
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/*.lock
+
+# Файлы Firebase
+google-services.json
+firebase-debug.log
+
+# Конфиденциальные данные
+.env
+.secret
+
+# Кастомные настройки системы сборки
+*.apk
+*.ap_
+*.ipa
+*.aab
