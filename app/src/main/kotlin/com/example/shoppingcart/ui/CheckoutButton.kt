@@ -15,11 +15,19 @@ import com.example.shoppingcart.ui.theme.ButtonYellow
 
 /**
  * Кнопка для перехода к оплате с отображением общей стоимости товаров.
+ *
+ * @param totalPrice Общая стоимость товаров в корзине.
+ * @param onCheckout Лямбда-функция, вызываемая при нажатии на кнопку.
+ * @param modifier Модификатор для настройки внешнего вида кнопки.
  */
 @Composable
-fun CheckoutButton(totalPrice: Int, onCheckout: () -> Unit, modifier: Modifier = Modifier) {
+fun CheckoutButton(
+    totalPrice: Int,
+    onCheckout: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = onCheckout,
+        onClick = onCheckout, // Обработчик нажатия
         colors = ButtonDefaults.buttonColors(containerColor = ButtonYellow),
         modifier = Modifier
             .fillMaxWidth()
@@ -27,13 +35,18 @@ fun CheckoutButton(totalPrice: Int, onCheckout: () -> Unit, modifier: Modifier =
             .height(56.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            // Текст "Далее" в центре кнопки
             Text(
                 text = "Далее",
                 style = MaterialTheme.typography.labelLarge,
                 color = Color.Black,
                 modifier = Modifier.align(Alignment.Center)
             )
+            // Текст с общей стоимостью в правой части кнопки
             Text(
                 text = "$totalPrice ₽",
                 style = MaterialTheme.typography.labelLarge,

@@ -10,25 +10,34 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+// Определение цветовой схемы для тёмной темы
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
+// Определение цветовой схемы для светлой темы
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
     tertiary = Pink40
 )
 
+/**
+ * Компонент темы для приложения ShoppingCart.
+ *
+ * @param darkTheme Указывает, должна ли использоваться тёмная тема. По умолчанию определяется системными настройками.
+ * @param dynamicColor Указывает, должны ли использоваться динамические цвета. Доступно только на Android 12+.
+ * @param content Содержимое, которое будет использовано внутри темы.
+ */
 @Composable
 fun ShoppingcartTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    // Выбор цветовой схемы в зависимости от настроек
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
@@ -39,6 +48,7 @@ fun ShoppingcartTheme(
         else -> LightColorScheme
     }
 
+    // Применение темы Material3
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,

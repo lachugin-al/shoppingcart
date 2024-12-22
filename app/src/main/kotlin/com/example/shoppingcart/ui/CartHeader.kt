@@ -16,9 +16,10 @@ import androidx.compose.ui.unit.dp
 
 /**
  * Компонент, который отображает заголовок экрана корзины и количество товаров в корзине.
- * Над заголовком размещены:
- * - кнопка удаления корзины, которая вызывает onDeleteCart при нажатии;
- * - кнопка возврата к предыдущему Activity.
+ *
+ * @param itemCount Количество товаров в корзине.
+ * @param onDeleteCart Лямбда-функция, вызываемая при нажатии на кнопку удаления корзины.
+ * @param onBackClick Лямбда-функция, вызываемая при нажатии на кнопку возврата.
  */
 @Composable
 fun CartHeader(
@@ -36,12 +37,14 @@ fun CartHeader(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Кнопка возврата
             IconButton(onClick = onBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Назад"
                 )
             }
+            // Кнопка удаления корзины
             IconButton(onClick = onDeleteCart) {
                 Icon(
                     imageVector = Icons.Default.Delete,
@@ -51,6 +54,8 @@ fun CartHeader(
         }
 
         Spacer(modifier = Modifier.height(8.dp))
+
+        // Заголовок и количество товаров
         Column(modifier = Modifier.align(Alignment.Start)) {
             Text(
                 text = "Корзина",
@@ -58,9 +63,23 @@ fun CartHeader(
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "$itemCount блюда",
+                text = "$itemCount ${getItemCountLabel(itemCount)}",
                 style = MaterialTheme.typography.titleSmall
             )
         }
+    }
+}
+
+/**
+ * Возвращает корректное слово "блюдо" в зависимости от количества.
+ *
+ * @param count Количество товаров.
+ * @return Слово в правильной форме.
+ */
+fun getItemCountLabel(count: Int): String {
+    return when {
+        count % 10 == 1 && count % 100 != 11 -> "блюдо"
+        count % 10 in 2..4 && (count % 100 !in 12..14) -> "блюда"
+        else -> "блюд"
     }
 }

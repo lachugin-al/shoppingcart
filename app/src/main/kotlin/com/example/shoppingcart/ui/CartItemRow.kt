@@ -22,11 +22,9 @@ import coil.request.SuccessResult
 
 /**
  * Компонент для отображения строки товара в корзине.
- * Состоит из:
- * - изображение товара (с использованием Coil для загрузки);
- * - название;
- * - цена;
- * - счётчик для изменения количества товара.
+ *
+ * @param cartItem Объект [CartItem], представляющий данные о товаре.
+ * @param onCountChange Лямбда-функция, вызываемая при изменении количества товара.
  */
 @Composable
 fun CartItemRow(cartItem: CartItem, onCountChange: (Int) -> Unit) {
@@ -36,6 +34,7 @@ fun CartItemRow(cartItem: CartItem, onCountChange: (Int) -> Unit) {
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        // Изображение товара
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(cartItem.imageUrl)
@@ -43,10 +42,10 @@ fun CartItemRow(cartItem: CartItem, onCountChange: (Int) -> Unit) {
                 .placeholder(R.drawable.loading_image)
                 .listener(
                     onError = { _: ImageRequest, throwable: ErrorResult ->
-                        Log.e("Coil", "Image loading error: ${throwable.throwable.message}")
+                        Log.e("Coil", "Ошибка загрузки изображения: ${throwable.throwable.message}")
                     },
                     onSuccess = { _: ImageRequest, _: SuccessResult ->
-                        Log.d("Coil", "Image loaded successfully")
+                        Log.d("Coil", "Изображение успешно загружено")
                     }
                 )
                 .build(),
@@ -59,6 +58,7 @@ fun CartItemRow(cartItem: CartItem, onCountChange: (Int) -> Unit) {
 
         Spacer(modifier = Modifier.width(16.dp))
 
+        // Информация о товаре
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -79,6 +79,7 @@ fun CartItemRow(cartItem: CartItem, onCountChange: (Int) -> Unit) {
 
         Spacer(modifier = Modifier.width(16.dp))
 
+        // Счётчик для изменения количества товара
         Counter(
             count = cartItem.count,
             onCountChange = onCountChange

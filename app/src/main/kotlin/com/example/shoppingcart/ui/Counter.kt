@@ -22,12 +22,16 @@ import androidx.compose.ui.unit.sp
 
 /**
  * Компонент для изменения количества товара.
- * Состоит из:
- * - кнопки (уменьшение и увеличение)
- * - counter отображающий текущее количество товара.
+ *
+ * @param count Текущее количество товара.
+ * @param onCountChange Лямбда-функция, вызываемая при изменении количества товара. Передаёт новое значение в вызывающий компонент.
  */
 @Composable
-fun Counter(count: Int, onCountChange: (Int) -> Unit) {
+fun Counter(
+    count: Int,
+    onCountChange: (Int) -> Unit
+) {
+    // Контейнер для всего компонента
     Box(
         modifier = Modifier
             .width(100.dp)
@@ -35,6 +39,7 @@ fun Counter(count: Int, onCountChange: (Int) -> Unit) {
             .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
             .padding(horizontal = 4.dp)
     ) {
+        // Горизонтальная компоновка для кнопок и значения
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -42,6 +47,7 @@ fun Counter(count: Int, onCountChange: (Int) -> Unit) {
                 .fillMaxWidth()
                 .padding(horizontal = 4.dp)
         ) {
+            // Кнопка уменьшения количества
             Text(
                 text = "-",
                 style = MaterialTheme.typography.bodyLarge.copy(
@@ -54,6 +60,7 @@ fun Counter(count: Int, onCountChange: (Int) -> Unit) {
                     .padding(4.dp)
             )
 
+            // Текущее количество товара
             Text(
                 text = count.toString(),
                 style = MaterialTheme.typography.bodyMedium.copy(
@@ -65,6 +72,7 @@ fun Counter(count: Int, onCountChange: (Int) -> Unit) {
                     .padding(horizontal = 8.dp)
             )
 
+            // Кнопка увеличения количества
             Text(
                 text = "+",
                 style = MaterialTheme.typography.bodyLarge.copy(

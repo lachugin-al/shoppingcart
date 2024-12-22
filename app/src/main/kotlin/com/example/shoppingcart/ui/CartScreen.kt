@@ -11,18 +11,21 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.shoppingcart.ui.CartHeader
-import com.example.shoppingcart.ui.CartItemRow
-import com.example.shoppingcart.ui.CheckoutButton
 
+/**
+ * Экран корзины, отображающий список товаров, итоговую сумму и кнопку для продолжения.
+ *
+ * @param viewModel Экземпляр [CartViewModel], предоставляющий данные и логику для управления состоянием корзины.
+ */
 @Composable
 fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
+    // Подписываемся на состояния ViewModel
     val cartItems by viewModel.cartItems.collectAsState()
     val totalPrice by viewModel.totalPrice.collectAsState()
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize() // Занимаем весь экран
             .background(Color.LightGray)  // Цвет фона экрана
     ) {
         // Верхняя часть экрана с заголовком и списком товаров
