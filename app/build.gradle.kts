@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("dagger.hilt.android.plugin") // Hilt плагин
     kotlin("kapt")
-    id("io.gitlab.arturbosch.detekt") version "1.23.7"
+    alias(libs.plugins.detekt) // Detekt плагин
 }
 
 android {
