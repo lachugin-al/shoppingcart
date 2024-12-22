@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("dagger.hilt.android.plugin") // Hilt плагин
     kotlin("kapt")
-//    id("io.gitlab.arturbosch.detekt") version "1.23.7"
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 android {
@@ -73,7 +73,7 @@ dependencies {
     // Hilt for Compose
     implementation(libs.hilt.navigation.compose)
 
-//    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
+    detektPlugins(libs.detekt.formatting)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -84,16 +84,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-//tasks {
-//    withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-//        reports {
-//            html.required.set(true)
-//            xml.required.set(true)
-//            txt.required.set(false)
-//        }
-//    }
-//}
-//
-//tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-//    jvmTarget = "17"
-//}
+tasks {
+    withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+        reports {
+            html.required.set(true)
+            xml.required.set(true)
+            txt.required.set(false)
+        }
+    }
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    jvmTarget = "17"
+}
