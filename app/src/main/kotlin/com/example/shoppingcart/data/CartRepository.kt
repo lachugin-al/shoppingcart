@@ -1,9 +1,11 @@
 package com.example.shoppingcart.data
 
 /**
- * Репозиторий корзины, реализующий интерфейс взаимодействия с элементами CartInteractor.
+ * Репозиторий корзины, реализующий интерфейс взаимодействия с элементами [CartInteractor].
  */
 class CartRepository : CartInteractor {
+
+    // Временное хранилище элементов корзины.
     private val cartItems = mutableListOf<CartItem>(
         CartItem(
             "1",
@@ -41,6 +43,7 @@ class CartRepository : CartInteractor {
 
     /**
      * Возвращает список всех элементов, находящихся в корзине.
+     *
      * @return Список объектов [CartItem], представляющих товары в корзине.
      */
     override suspend fun getCartItems(): List<CartItem> {
@@ -90,6 +93,12 @@ class CartRepository : CartInteractor {
         }
     }
 
+    /**
+     * Проверяет корректность данных объекта [CartItem].
+     *
+     * @param item Объект [CartItem] для проверки.
+     * @throws IllegalArgumentException Если данные недействительны.
+     */
     private fun validateCartItem(item: CartItem) {
         require(item.price > 0) { "Цена не должна быть отрицательной" }
         require(item.count in 1..99) { "Количество товаров должно быть в диапазоне 1..99" }
