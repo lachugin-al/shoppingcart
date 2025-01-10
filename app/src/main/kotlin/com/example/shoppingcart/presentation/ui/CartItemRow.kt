@@ -1,4 +1,4 @@
-package com.example.shoppingcart.ui
+package com.example.shoppingcart.presentation.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.*

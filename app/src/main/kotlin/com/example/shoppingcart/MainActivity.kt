@@ -3,7 +3,7 @@ package com.example.shoppingcart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.shoppingcart.ui.CartScreen
+import com.example.shoppingcart.presentation.ui.CartScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

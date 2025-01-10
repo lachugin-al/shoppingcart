@@ -1,4 +1,4 @@
-package com.example.shoppingcart.ui
+package com.example.shoppingcart.presentation.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.shoppingcart.ui.theme.ButtonYellow
+import com.example.shoppingcart.presentation.ui.theme.ButtonYellow
 
 /**
  * Кнопка для перехода к оплате с отображением общей стоимости товаров.

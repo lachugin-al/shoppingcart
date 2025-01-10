@@ -1,4 +1,4 @@
-package com.example.shoppingcart.ui.theme
+package com.example.shoppingcart.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

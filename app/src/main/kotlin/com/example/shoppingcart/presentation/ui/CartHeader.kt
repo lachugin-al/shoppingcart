@@ -1,4 +1,4 @@
-package com.example.shoppingcart.ui
+package com.example.shoppingcart.presentation.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
