@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+
 /**
  * Экран корзины, отображающий список товаров, итоговую сумму и кнопку для продолжения.
  *
@@ -24,8 +25,20 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
     // Подписываемся на состояния ViewModel
     val cartItems by viewModel.cartItems.collectAsState()
     val totalPrice by viewModel.totalPrice.collectAsState()
+    val isOrderSent by viewModel.isOrderSent.collectAsState()
 
-    if (cartItems.isEmpty()) {
+    if (isOrderSent) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Заказ успешно отправлен!",
+                style = MaterialTheme.typography.headlineSmall,
+                color = Color.Green
+            )
+        }
+    } else if (cartItems.isEmpty()) {
         // Пустая корзина
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -50,7 +63,10 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                     .fillMaxWidth()
                     .background(
                         color = Color.White,
-                        shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)  // Закругление нижних углов
+                        shape = RoundedCornerShape(
+                            bottomStart = 16.dp,
+                            bottomEnd = 16.dp
+                        )  // Закругление нижних углов
                     )
                     .padding(16.dp)
             ) {
@@ -89,13 +105,16 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                     .fillMaxWidth()
                     .background(
                         color = Color.White,
-                        shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)  // Закругление верхних углов
+                        shape = RoundedCornerShape(
+                            topStart = 16.dp,
+                            topEnd = 16.dp
+                        )  // Закругление верхних углов
                     )
                     .padding(16.dp)
             ) {
                 CheckoutButton(
                     totalPrice = totalPrice,
-                    onCheckout = { /* Переход к оплате */ }
+                    onCheckout = { viewModel.sendOrder() }
                 )
             }
         }

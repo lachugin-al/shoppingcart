@@ -73,6 +73,13 @@ dependencies {
     // Hilt for Compose
     implementation(libs.hilt.navigation.compose)
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    // OkHttp
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
+
     detektPlugins(libs.detekt.formatting)
 
     testImplementation(libs.junit)

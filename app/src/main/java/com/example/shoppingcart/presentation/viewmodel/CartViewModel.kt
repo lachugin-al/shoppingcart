@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.shoppingcart.data.CartItem
 import com.example.shoppingcart.domain.usecase.DeleteCartUseCase
 import com.example.shoppingcart.domain.usecase.GetCartItemsUseCase
+import com.example.shoppingcart.domain.usecase.SendTestOrderUseCase
 import com.example.shoppingcart.domain.usecase.UpdateCartItemUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +24,8 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private val getCartItemsUseCase: GetCartItemsUseCase,
     private val updateCartItemUseCase: UpdateCartItemUseCase,
-    private val deleteCartUseCase: DeleteCartUseCase
+    private val deleteCartUseCase: DeleteCartUseCase,
+    private val sendTestOrderUseCase: SendTestOrderUseCase
 ) : ViewModel() {
 
     // Состояние списка товаров в корзине.
@@ -33,6 +35,10 @@ class CartViewModel @Inject constructor(
     // Состояние общей стоимости товаров в корзине.
     private val _totalPrice = MutableStateFlow(0)
     val totalPrice: StateFlow<Int> = _totalPrice
+
+    // Состояние отправки тестового заказа
+    private val _isOrderSent = MutableStateFlow(false)
+    val isOrderSent: StateFlow<Boolean> = _isOrderSent
 
     init {
         // Загрузка товаров при инициализации ViewModel.
@@ -92,5 +98,19 @@ class CartViewModel @Inject constructor(
      */
     private fun calculateTotalPrice(items: List<CartItem>) {
         _totalPrice.value = items.sumOf { it.price * it.count }
+    }
+
+    /**
+     * Отправка тестового заказа на сервер.
+     */
+    fun sendOrder() {
+        viewModelScope.launch {
+            try {
+                sendTestOrderUseCase()
+                _isOrderSent.value = true
+            } catch (e: Exception) {
+                println("Ошибка при отправке заказа: ${e.message}")
+            }
+        }
     }
 }
