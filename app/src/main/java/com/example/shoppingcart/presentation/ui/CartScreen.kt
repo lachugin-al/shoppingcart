@@ -14,6 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 
 /**
  * Экран корзины, отображающий список товаров, итоговую сумму и кнопку для продолжения.
@@ -29,25 +32,37 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
 
     if (isOrderSent) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("order_success_container")
+                .semantics { contentDescription = "order_success_container" },
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = "Заказ успешно отправлен!",
                 style = MaterialTheme.typography.headlineSmall,
-                color = Color.Green
+                color = Color.Green,
+                modifier = Modifier
+                    .testTag("order_success_message")
+                    .semantics { contentDescription = "order_success_message" }
             )
         }
     } else if (cartItems.isEmpty()) {
         // Пустая корзина
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("empty_cart_container")
+                .semantics { contentDescription = "empty_cart_container" },
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = "Ваша корзина пуста",
                 style = MaterialTheme.typography.headlineSmall,
-                color = Color.Gray
+                color = Color.Gray,
+                modifier = Modifier
+                    .testTag("empty_cart_message")
+                    .semantics { contentDescription = "empty_cart_message" }
             )
         }
     } else {
@@ -55,6 +70,8 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
             modifier = Modifier
                 .fillMaxSize() // Занимаем весь экран
                 .background(Color.LightGray)  // Цвет фона экрана
+                .testTag("cart_screen_container")
+                .semantics { contentDescription = "cart_screen_container" }
         ) {
             // Верхняя часть экрана с заголовком и списком товаров
             Column(
@@ -69,6 +86,7 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                         )  // Закругление нижних углов
                     )
                     .padding(16.dp)
+                    .semantics { contentDescription = "cart_content_container" }
             ) {
                 // Заголовок корзины
                 CartHeader(
@@ -76,7 +94,8 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                     onBackClick = { /* Обработка возврата */ },
                     onDeleteCart = {
                         viewModel.clearCart() // Очищаем корзину через ViewModel
-                    }
+                    },
+                    modifier = Modifier.testTag("cart_header_in_screen")
                 )
 
                 // Список товаров
@@ -84,6 +103,8 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)  // Список будет занимать оставшееся место
+                        .testTag("cart_items_list")
+                        .semantics { contentDescription = "cart_items_list" }
                 ) {
                     items(cartItems) { item ->
                         CartItemRow(
@@ -97,7 +118,12 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                 }
             }
 
-            Spacer(modifier = Modifier.height(36.dp))  // Отступ между списком и кнопкой
+            Spacer(
+                modifier = Modifier
+                    .height(36.dp)
+                    .testTag("cart_spacer")
+                    .semantics { contentDescription = "cart_spacer" }
+            )  // Отступ между списком и кнопкой
 
             // Блок с кнопкой "Далее", который всегда прижат к низу
             Box(
@@ -111,6 +137,8 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                         )  // Закругление верхних углов
                     )
                     .padding(16.dp)
+                    .testTag("checkout_button_container")
+                    .semantics { contentDescription = "checkout_button_container" }
             ) {
                 CheckoutButton(
                     totalPrice = totalPrice,

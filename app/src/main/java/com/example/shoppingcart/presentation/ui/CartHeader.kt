@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -20,32 +23,49 @@ import androidx.compose.ui.unit.dp
  * @param itemCount Количество товаров в корзине.
  * @param onDeleteCart Лямбда-функция, вызываемая при нажатии на кнопку удаления корзины.
  * @param onBackClick Лямбда-функция, вызываемая при нажатии на кнопку возврата.
+ * @param modifier Модификатор для настройки внешнего вида компонента.
  */
 @Composable
 fun CartHeader(
     itemCount: Int,
     onDeleteCart: () -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
+            .testTag("cart_header")
+            .semantics { contentDescription = "cart_header" }
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("cart_header_buttons_row")
+                .semantics { contentDescription = "cart_header_buttons_row" },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Кнопка возврата
-            IconButton(onClick = onBackClick) {
+            IconButton(
+                onClick = onBackClick,
+                modifier = Modifier
+                    .testTag("cart_back_button")
+                    .semantics { contentDescription = "cart_back_button" }
+            ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Назад"
                 )
             }
             // Кнопка удаления корзины
-            IconButton(onClick = onDeleteCart) {
+            IconButton(
+                onClick = onDeleteCart,
+                modifier = Modifier
+                    .testTag("cart_delete_button")
+                    .semantics { contentDescription = "cart_delete_button" }
+            ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Удалить корзину"
@@ -53,18 +73,34 @@ fun CartHeader(
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(
+            modifier = Modifier
+                .height(8.dp)
+                .testTag("cart_header_spacer")
+                .semantics { contentDescription = "cart_header_spacer" }
+        )
 
         // Заголовок и количество товаров
-        Column(modifier = Modifier.align(Alignment.Start)) {
+        Column(
+            modifier = Modifier
+                .align(Alignment.Start)
+                .testTag("cart_header_title_column")
+                .semantics { contentDescription = "cart_header_title_column" }
+        ) {
             Text(
                 text = "Корзина",
                 style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .testTag("cart_title")
+                    .semantics { contentDescription = "cart_title" }
             )
             Text(
                 text = "$itemCount ${getItemCountLabel(itemCount)}",
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier
+                    .testTag("cart_item_count")
+                    .semantics { contentDescription = "cart_item_count" }
             )
         }
     }

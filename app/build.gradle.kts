@@ -33,7 +33,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
     buildFeatures {
         compose = true
@@ -44,7 +44,7 @@ android {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 dependencies {
@@ -102,5 +102,5 @@ tasks {
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    jvmTarget = "17"
+    jvmTarget = "21"
 }

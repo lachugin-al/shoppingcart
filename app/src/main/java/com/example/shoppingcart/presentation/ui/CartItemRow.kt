@@ -9,8 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.shoppingcart.R
@@ -25,13 +28,20 @@ import coil.request.SuccessResult
  *
  * @param cartItem Объект [CartItem], представляющий данные о товаре.
  * @param onCountChange Лямбда-функция, вызываемая при изменении количества товара.
+ * @param modifier Модификатор для настройки внешнего вида компонента.
  */
 @Composable
-fun CartItemRow(cartItem: CartItem, onCountChange: (Int) -> Unit) {
+fun CartItemRow(
+    cartItem: CartItem, 
+    onCountChange: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .testTag("cart_item_row")
+            .semantics { contentDescription = "cart_item_row_${cartItem.id}" },
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Изображение товара
@@ -52,37 +62,61 @@ fun CartItemRow(cartItem: CartItem, onCountChange: (Int) -> Unit) {
             contentDescription = cartItem.name,
             modifier = Modifier
                 .size(64.dp)
-                .clip(CircleShape),
+                .clip(CircleShape)
+                .testTag("cart_item_image_${cartItem.id}")
+                .semantics { contentDescription = "cart_item_image_${cartItem.id}" },
             contentScale = ContentScale.Crop
         )
 
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(
+            modifier = Modifier
+                .width(16.dp)
+                .semantics { contentDescription = "cart_item_spacer1_${cartItem.id}" }
+        )
 
         // Информация о товаре
         Column(
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 0.dp)
+                .testTag("cart_item_info_${cartItem.id}")
+                .semantics { contentDescription = "cart_item_info_${cartItem.id}" }
         ) {
             Text(
                 text = cartItem.name,
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .testTag("cart_item_name_${cartItem.id}")
+                    .semantics { contentDescription = "cart_item_name_${cartItem.id}" }
             )
-            Spacer(modifier = Modifier.width(4.dp))
+            Spacer(
+                modifier = Modifier
+                    .width(4.dp)
+                    .semantics { contentDescription = "cart_item_info_spacer_${cartItem.id}" }
+            )
             Text(
                 text = "${cartItem.price} ${cartItem.currency}",
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier
+                    .testTag("cart_item_price_${cartItem.id}")
+                    .semantics { contentDescription = "cart_item_price_${cartItem.id}" }
             )
         }
 
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(
+            modifier = Modifier
+                .width(16.dp)
+                .semantics { contentDescription = "cart_item_spacer2_${cartItem.id}" }
+        )
 
         // Счётчик для изменения количества товара
         Counter(
             count = cartItem.count,
-            onCountChange = onCountChange
+            onCountChange = onCountChange,
+            itemId = cartItem.id.toString(),
+            modifier = Modifier.testTag("cart_item_counter_${cartItem.id}")
         )
     }
 }

@@ -10,6 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.example.shoppingcart.presentation.ui.theme.ButtonYellow
 
@@ -29,14 +32,19 @@ fun CheckoutButton(
     Button(
         onClick = onCheckout, // Обработчик нажатия
         colors = ButtonDefaults.buttonColors(containerColor = ButtonYellow),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .height(56.dp),
+            .height(56.dp)
+            .testTag("checkout_button")
+            .semantics { contentDescription = "checkout_button" },
         shape = RoundedCornerShape(16.dp)
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("checkout_button_content")
+                .semantics { contentDescription = "checkout_button_content" },
             contentAlignment = Alignment.Center
         ) {
             // Текст "Далее" в центре кнопки
@@ -44,14 +52,20 @@ fun CheckoutButton(
                 text = "Далее",
                 style = MaterialTheme.typography.labelLarge,
                 color = Color.Black,
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .testTag("checkout_button_text")
+                    .semantics { contentDescription = "checkout_button_text" }
             )
             // Текст с общей стоимостью в правой части кнопки
             Text(
                 text = "$totalPrice ₽",
                 style = MaterialTheme.typography.labelLarge,
                 color = Color.Black,
-                modifier = Modifier.align(Alignment.CenterEnd)
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .testTag("checkout_button_price")
+                    .semantics { contentDescription = "checkout_button_price" }
             )
         }
     }
