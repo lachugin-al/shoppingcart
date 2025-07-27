@@ -11,7 +11,7 @@ coroutines = "1.7.1"
 # Testing Libraries
 junit = "4.13.2"
 junitVersion = "1.1.5"
-espressoCore = "3.5.1"
+espressoCore = "3.5.0"
 # Compose Libraries
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"

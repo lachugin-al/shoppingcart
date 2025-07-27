@@ -64,7 +64,8 @@ dependencies {
     // Coroutines for async operations
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.androidx.ui.test.junit4.android)
+    // UI test libraries should only be in androidTestImplementation, not in implementation
+    // Moving this to the appropriate section to resolve dependency conflicts
 
     // Hilt dependencies
     implementation(libs.hilt.android)
@@ -87,6 +88,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.ui.test.junit4.android)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
