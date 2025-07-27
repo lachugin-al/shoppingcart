@@ -10,7 +10,7 @@ class CartRepository : CartInteractor {
         CartItem(
             "1",
             "Суп Том Ям с морепродуктами",
-            99,
+            98,
             100,
             "₽",
             "https://i.pinimg.com/736x/70/b0/d5/70b0d50c800039db6f1d58273efbf542.jpg"
@@ -33,6 +33,38 @@ class CartRepository : CartInteractor {
         ),
         CartItem(
             "4",
+            "Блинчики с малиной и маскарпоне",
+            99,
+            100,
+            "₽",
+            "https://i.pinimg.com/736x/70/b0/d5/70b0d50c800039db6f1d58273efbf542.jpg"
+        ),
+        CartItem(
+            "5",
+            "Блинчики с малиной и маскарпоне",
+            1,
+            100,
+            "₽",
+            "https://i.pinimg.com/736x/70/b0/d5/70b0d50c800039db6f1d58273efbf542.jpg"
+        ),
+        CartItem(
+            "6",
+            "Блинчики с малиной и маскарпоне",
+            1,
+            100,
+            "₽",
+            "https://i.pinimg.com/736x/70/b0/d5/70b0d50c800039db6f1d58273efbf542.jpg"
+        ),
+        CartItem(
+            "7",
+            "Блинчики с малиной и маскарпоне",
+            1,
+            100,
+            "₽",
+            "https://i.pinimg.com/736x/70/b0/d5/70b0d50c800039db6f1d58273efbf542.jpg"
+        ),
+        CartItem(
+            "8",
             "Блинчики с малиной и маскарпоне",
             1,
             100,
